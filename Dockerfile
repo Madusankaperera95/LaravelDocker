@@ -20,6 +20,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 
+RUN a2enmod rewrite
 
 # Install PHP extensions
 
@@ -38,7 +39,11 @@ RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 # Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
+
+COPY ./apache/laravel.conf /etc/apache2/sites-available/000-default.conf
+
+
 # Expose port 8000 and start PHP-FPM server
 EXPOSE 8000
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD ["apache2-foreground"]
