@@ -26,7 +26,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN a2enmod rewrite
 
-RUN service apache2 rewrite
+RUN service apache2 restart
 
 # Install PHP extensions
 
@@ -50,6 +50,6 @@ COPY ./apache/laravel.conf /etc/apache2/sites-available/000-default.conf
 
 
 # Expose port 8000 and start PHP-FPM server
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["apache2-foreground"]
