@@ -1,4 +1,8 @@
-FROM php:8.1-fpm
+FROM php:8.1-apache
+
+# Use /bin/bash instead of /bin/sh
+SHELL ["/bin/bash", "-c"]
+
 
 
 # Install PHP extensions
