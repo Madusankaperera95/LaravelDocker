@@ -1,14 +1,14 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.1-fpm
 
 
 # Install PHP extensions
-RUN docker-php-ext-configure gd --with-jpeg
-RUN docker-php-ext-install gd pdo pdo_mysql
+RUN apt-get update -y && apt-get install -y openssl zip unzip git
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN docker-php-ext-install pdo mbstring
 
 # Install PHP extensions
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Set working directory
 WORKDIR /app
