@@ -49,6 +49,6 @@ COPY ./apache/laravel.conf /etc/apache2/sites-available/000-default.conf
 
 
 # Expose port 8000 and start PHP-FPM server
-EXPOSE 8000
+EXPOSE 80
 
 CMD ["apache2-foreground"]
