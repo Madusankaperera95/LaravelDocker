@@ -1,21 +1,10 @@
-FROM php:8.1-apache
+FROM php:8.1-apache as web
 
-# Use /bin/bash instead of /bin/sh
-SHELL ["/bin/bash", "-c"]
-
-
-
-# Install PHP extensions
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+                        libzip-dev \
+                        zip
 
-# Clear cache
+                    # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
